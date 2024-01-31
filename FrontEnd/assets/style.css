@@ -216,3 +216,53 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Page log in */
+.log{
+	width: 1440px;
+}
+
+.formulaire h2{
+	text-align: center;
+	margin-top: 242px;
+	margin-bottom: 60px;
+	margin-left: 50px;
+	
+}
+
+.formulaire form{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+	margin-left:400px;
+	margin-right: 30px;
+}
+
+
+
+.formulaire input{
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09); 
+	width: 379px;
+	padding: 18px 10px;
+	border: none; 
+}
+
+#email{
+
+	margin-bottom: 30px;
+}
+#connexion{
+	text-align: center;
+	font-size: 14px;
+	font-family: 'Syne';
+	font-weight: 700;
+	padding: 10px 20px;
+	width: 17%;
+	margin-right: 725px;
+}
+
+.formulaire a{
+	color: black;
+	margin-bottom: 415px;
+	margin-left: 130px;
+}
