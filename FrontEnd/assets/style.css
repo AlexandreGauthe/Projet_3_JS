@@ -215,6 +215,10 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+a{
+	text-decoration: none;
+	color: black;
+}
 
 /* Page log in */
 .log{
@@ -263,6 +267,14 @@ footer nav ul {
 
 .formulaire a{
 	color: black;
-	margin-bottom: 415px;
+	margin-bottom: 30px;
 	margin-left: 130px;
+}
+
+#error{
+
+	color: red;
+	margin-bottom: 215px;
+	text-align: center;
+	margin-left: 45px;
 }

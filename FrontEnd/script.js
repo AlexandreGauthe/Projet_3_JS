@@ -1,7 +1,6 @@
-// Fonction pour afficher les differernts travaux depuis l'API //
+// Récuperation via l'API //
 const gallery = document.querySelector(".gallery");
 const reponse = await fetch("http://localhost:5678/api/works").then(reponse => reponse.json());
-
 
 // Fonction pour afficher les differernts travaux depuis l'API //
 function afficherTravaux(reponse){
@@ -123,3 +122,4 @@ function afficherHotel(){
 
 // Appel de la fonction    
 afficherHotel();
+
