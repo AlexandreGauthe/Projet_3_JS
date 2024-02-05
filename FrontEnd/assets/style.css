@@ -272,9 +272,46 @@ a{
 }
 
 #error{
-
 	color: red;
 	margin-bottom: 215px;
 	text-align: center;
 	margin-left: 45px;
 }
+
+/* Version admin */
+
+.fa-regular-fa-pen-to-square{
+	width: 250px;
+	color: black;
+}
+
+.section-admin{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.section-admin h2{
+	margin-right: 20px;
+}
+
+.section-admin span{
+	margin-bottom: 0px;
+}
+
+.section-admin i{
+	margin-bottom: 25px;
+	margin-right: 10px;
+	margin-left: 5px;
+}
+
+.invisible{
+	display: none;
+}
+
+.visible{
+	display: block;
+		
+}
+

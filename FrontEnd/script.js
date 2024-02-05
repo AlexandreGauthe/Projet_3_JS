@@ -33,7 +33,7 @@ afficherTravaux(reponse);
 function afficherToutTravaux(){
 
 // Récuperation du bouton //
-    const btn_tout = document.querySelector(".tous");
+    const btn_tout = document.getElementById("tous");
 
 // Ecoute du clic sur le bouton //    
     btn_tout.addEventListener("click", () =>{
@@ -53,7 +53,7 @@ afficherToutTravaux();
 function afficheObjets(){
 
 // Récuperation du bouton //    
-    const btn_objets = document.querySelector(".objet");
+    const btn_objets = document.getElementById("objet");
 
 // Ecoute du clic sur le bouton //   
     btn_objets.addEventListener("click", ()=>{
@@ -77,7 +77,7 @@ afficheObjets();
 function afficheAppartements(){
 
 // Récuperation du bouton //    
-    const btn_appartement = document.querySelector(".appartement");
+    const btn_appartement = document.getElementById("appartement");
 
 // Ecoute du clic sur le bouton //    
     btn_appartement.addEventListener("click", ()=>{
@@ -102,7 +102,7 @@ afficheAppartements();
 function afficherHotel(){
     
 // Récuperation du bouton //    
-    const btn_hotel = document.querySelector(".hotel");
+    const btn_hotel = document.getElementById("hotel");
 
 // Ecoute du clic sur le bouton //    
     btn_hotel.addEventListener("click", ()=>{
@@ -123,3 +123,30 @@ function afficherHotel(){
 // Appel de la fonction    
 afficherHotel();
 
+// Page version admin //
+
+const admin =document.getElementById('admin');
+const filterMenu = document.querySelector('.filters-menu');
+console.log(filterMenu);
+const menuModifier = document.querySelector(".section-admin .invisible");
+console.log(menuModifier);
+
+function verifierStatut(){
+    let token = window.localStorage.getItem("token");
+    if (token !== null){
+        admin.innerText= "Logout";
+        menuModifier.classList.remove("invisible");
+        filterMenu.classList.add("invisible");
+    }else{ admin.innerText="Login";
+}}
+
+verifierStatut();
+
+admin.addEventListener("click",() =>{
+
+    verifierStatut();
+    if(admin.innerText ==="Logout"){
+    admin.href ="index.html";
+    window.localStorage.removeItem("token");
+    }
+})
