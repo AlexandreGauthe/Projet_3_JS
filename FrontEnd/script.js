@@ -136,12 +136,12 @@ function verifierStatut(){
         admin.innerText= "Logout";
         menuModifier.classList.remove("invisible");
         filterMenu.classList.toggle("invisible");
-        modale.classList.toggle("show-modal");
+        
 
 
     }else{ admin.innerText="Login";
         filterMenu.classList.toggle("filers-menu");
-        modale.classList.toggle("gallery-modal");
+        
 }}
 
 verifierStatut();

@@ -1,3 +1,22 @@
+// Récuperation de la modale//
+const modale = document.querySelector(".gallery-modal");
+const iconeClose = document.querySelector(".fa-xmark");
+const addMenu = document.getElementById("add-menu");
+
+// Gestion de l'ouverture et fermeture de la modale aux differents clics //
+function afficherModal(){
+
+    addMenu.addEventListener("click", ()=>{
+        modale.classList.toggle("show-modal");
+    })
+}
+
+function fermerModal(){
+
+    iconeClose.addEventListener("click",()=>{
+        modale.classList.remove("show-modal");
+    }    
+)}
 
 
 //Fonction pour afficher les travaux dans la modale//
@@ -6,7 +25,7 @@ async function afficherTravauxModal(){
 // Récuperation via l'API //
     const photo = await fetch("http://localhost:5678/api/works").then(photo => photo.json());
 
-// Récupération de la modale //
+// Récupération de la grille de la modale //
     const modalGrid = document.querySelector(".modal-grid");
 
 //  Boucle for pour parcourir tout les travaux //
@@ -33,7 +52,7 @@ async function afficherTravauxModal(){
     }
     const trashes = document.querySelectorAll(".vignette i");
     trashes.forEach((trash,index)=>{
-        trash.addEventListener('click',()=>{
+        trash.addEventListener("click",()=>{
             console.log(trash,index,"cliqué");
             fetch("http://localhost:5678/api/works/"+index,{
                 method:"DELETE"
@@ -42,9 +61,10 @@ async function afficherTravauxModal(){
 
     });
 }
+afficherModal()
+fermerModal();
 afficherTravauxModal();
 
 
 
 
- 
