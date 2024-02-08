@@ -315,7 +315,7 @@ a{
 		
 }
 
-/* Modale */
+/* Modale Modifier*/
 
 .gallery-modal{
 	display: none;
@@ -347,13 +347,13 @@ a{
 	grid-column-gap: 10px;
 	grid-row-gap: 20px;
 	border-bottom: 1px solid black;
-	padding-bottom: 90px;
+	padding-bottom: 80px;
 }
 .modal-grid img{
 	width: 100%;
 	object-fit: cover;
 }
-.fa-xmark{
+.gallery-modal .fa-xmark{
 	font-size: 20px;
 	text-align: end;
 	margin-right: 30px;
@@ -368,7 +368,7 @@ a{
 	font-family: 'Syne';
 	font-weight: 700;
 	margin-left: 220px;
-	margin-top: 20px;
+	margin-top: 0px;
 	margin-bottom: 40px;
 	border: 1px solid #1D6154;
 	border-radius: 60px;
@@ -388,10 +388,151 @@ a{
 	margin-top: 5px;
 	padding: 2px;
 	box-sizing: border-box;
-
 }
 
 .show-modal{
 	display: flex!important;
 	flex-direction: column;
+}
+
+/*Modale Ajout */
+
+.section-addform{
+	width: 100%;
+}
+
+.form-ajout{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0px;
+	gap: 0px;
+}	
+
+
+.form-ajout form{
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.form-ajout .icons{
+	margin-top: 0px;
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-start;
+	gap: 600px;
+}
+
+.form-ajout .fa-arrow-left{
+	margin-left: 100px;
+	margin-top: -20px;
+	font-size: 20px;
+}
+
+.form-ajout .fa-xmark{
+	margin-right: 100px;
+	margin-bottom: 20px;
+	margin-top: -30px;
+	font-size: 20px;
+}
+
+.form-ajout .boite-image{
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0px;
+	background-color: #e8f1f6;
+	border-radius: 5px;
+	margin: auto;
+	margin-top: -10px;
+	margin-bottom: 2s0px;
+}
+.form-ajout p{
+	margin-bottom: 50px;
+}
+.form-ajout .add-title{
+	font-weight: lighter;
+	font-family: 'Syne';
+	margin-top: 20px;
+}
+
+.boite-image .label-file{
+	color: #306685;
+	padding: 12px 35px;
+	border-radius: 60px;
+	background-color: #cbd6dc;
+	font-size: 14px;
+	font-family: 'Syne';
+	margin: auto;
+	margin-bottom: 5px;
+}
+
+.boite-image .input-file{
+	position: absolute;
+	top: 235px;
+	opacity: 0;
+}
+
+.boite-image span{
+	margin-bottom: 20px;
+	font-size: 10px;
+}
+
+.boite-image .fa-image{
+	margin: auto;
+	color:  #b9c5cc;
+	font-size: 70px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.boite-image label{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 0px;
+}
+
+.form-ajout input{
+	width: 25%;
+	padding: 15px 130px;
+	border: none;
+	box-shadow: 2px 2px 6px #c8c8c8;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+.form-ajout label{
+	margin-left : 88px;
+	margin-top: 20px;
+}
+
+.form-ajout .select{
+	width: 70%;
+	padding: 15px 115px;
+	border: none;
+	box-shadow: 2px 2px 6px #c8c8c8;
+	background-color: white;
+	margin: auto;
+}
+
+.form-ajout button{
+	margin: auto;
+	margin-top: 40px;
+	margin-left: 40px;
+	width: 80%;
+}
+
+.form-ajout .bordure{
+	
+	width: 70%;
+	border-top: 1px solid #b3b3b3;
+	margin-top: 50px;
+	margin-left: 87px;
 }

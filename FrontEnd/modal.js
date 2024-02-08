@@ -3,6 +3,7 @@ const modale = document.querySelector(".gallery-modal");
 const iconeClose = document.querySelector(".fa-xmark");
 const addMenu = document.getElementById("add-menu");
 
+
 // Gestion de l'ouverture et fermeture de la modale aux differents clics //
 function afficherModal(){
 
@@ -61,9 +62,53 @@ async function afficherTravauxModal(){
 
     });
 }
+
+
+// Fonction pour passer a la modale d'ajout de travaux //
+function modalAjout(){
+    const btnAjout = document.getElementById("ajout");
+    btnAjout.addEventListener("click",()=>{
+        console.log("cliqué");
+        modale.innerHTML="";
+        const formulaireAjout = `  <div class="form-ajout">
+                                        <div class="icons">
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                        <i class="fa-solid fa-xmark"></i>
+                                        </div>
+                                        <p class="add-title">Ajout photo</p>
+                                        <form id="form-ajout" action="#" method="POST">
+                                            <div class="boite-image">
+                                                <i class="fa-regular fa-image"></i>
+                                                <label for="image" class="label-file">+ Ajouter photo</label>
+                                                <input type="file" class="input-file id="photo" name="photo accept="jpg, png>
+                                                <span>jpg. png : 4mo max</span>
+                                            </div>    
+                                            <label for="titre">Titre</label>
+                                            <input type="text" id="titre" name="titre">
+                                            <label for="categorie">Catégorie</label>
+                                            <select class="select" name="categorie" id="categorie">
+                                                <option value="">--Choisissez une catégorie--</option>
+                                                <option value="1">Objets<option</option>
+                                                <option value="2">Appartements</option>
+                                                <option value="3">Hotels & restaurants</option>
+                                            </select>
+                                            <div class=bordure>
+                                                <button id="valider" type="button">Valider</button>
+                                            </div>        
+                                        </form>
+                                    </div>
+                                `
+        const conteneurForm = document.createElement("section");
+        conteneurForm.classList.add("section-addform");
+        conteneurForm.innerHTML=formulaireAjout;
+        modale.appendChild(conteneurForm);
+        })
+}
+
 afficherModal()
 fermerModal();
 afficherTravauxModal();
+modalAjout();
 
 
 
