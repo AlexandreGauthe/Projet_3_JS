@@ -7,7 +7,7 @@ const pass = document.getElementById('password');
 
 async function connect(chargeUtile){
     
-    const response =await fetch ("http://localhost:5678/api/users/login", {
+    await fetch ("http://localhost:5678/api/users/login", {
     method:"POST",
     header:{
         "Content-Type": "application/json",
@@ -16,7 +16,6 @@ async function connect(chargeUtile){
         },
     body: chargeUtile
         })
-        
 }
 
 function verifierLogs(){
@@ -30,21 +29,25 @@ function verifierLogs(){
         return true;
      }   
 }
-
-logIn.addEventListener('submit',(event)=>{
-    event.preventDefault();
-    verifierLogs()
-    while(verifierLogs === false){
-        verifierLogs();
-    }
-    if (verifierLogs() === true){
-    const charge = {
-    email : event.target.querySelector("[name=email]").value,
-    password: event.target.querySelector("[name=password]").value
-    };
-    const chargeUtile = JSON.stringify(charge);
-    connect(chargeUtile);
-    document.location.href="index.html";
-    window.localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4");
-    }});
+async function verifierAdmin(){
+    if(logIn){
+    logIn.addEventListener('submit',(event)=>{
+        event.preventDefault();
+        verifierLogs()
+        while(verifierLogs === false){
+            verifierLogs();
+        }
+        if (verifierLogs() === true){
+        const charge = {
+        "email" : event.target.querySelector("[name=email]").value,
+        "password": event.target.querySelector("[name=password]").value
+        }
+        const chargeUtile = JSON.stringify(charge);
+        console.log(chargeUtile);
+        connect(chargeUtile);
+        document.location.href="index.html";
+        window.localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4");
+        }})
+    }};
+verifierAdmin();    
         
