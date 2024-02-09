@@ -1,14 +1,30 @@
-// Récuperation de la modale//
+// Génération de la modale//
+let retour = true;
+const boite = document.createElement("div");
+const modalModif =`
+                            <div class="gallery-modal">
+                                <i class="fa-solid fa-xmark"></i>
+                                <p>Galerie photo</p>
+                            <div class="modal-grid">
+    
+                            </div>
+                            <button id="ajout" type="button">Ajouter une photo</button>
+                            </div>
+                `;
+const sectionModale = document.querySelector(".modal");
+boite.innerHTML=modalModif;
+sectionModale.appendChild(boite);
 const modale = document.querySelector(".gallery-modal");
 const iconeClose = document.querySelector(".fa-xmark");
 const addMenu = document.getElementById("add-menu");
-
+const conteneurForm = document.createElement("section");
+conteneurForm.classList.add("section-addform");
 
 // Gestion de l'ouverture et fermeture de la modale aux differents clics //
 function afficherModal(){
 
     addMenu.addEventListener("click", ()=>{
-        modale.classList.toggle("show-modal");
+        modale.classList.add("show-modal");
     })
 }
 
@@ -26,13 +42,13 @@ async function afficherTravauxModal(){
 // Récuperation via l'API //
     const photo = await fetch("http://localhost:5678/api/works").then(photo => photo.json());
 
-// Récupération de la grille de la modale //
-    const modalGrid = document.querySelector(".modal-grid");
+
 
 //  Boucle for pour parcourir tout les travaux //
     for (let i = 0; i < photo.length; i++){
     
 //  Déclaration des variable pour traiter le travaux du tour en cours et créer les éléments HTML//        
+        const modalGrid = document.querySelector(".modal-grid");
         const travaux = photo[i];
         const vignette = document.createElement("div");
         const imageModal = document.createElement("img");
@@ -55,7 +71,7 @@ async function afficherTravauxModal(){
     trashes.forEach((trash,index)=>{
         trash.addEventListener("click",()=>{
             console.log(trash,index,"cliqué");
-            fetch("http://localhost:5678/api/works/"+index,{
+            fetch("http://localhost:5678/api/works/"+trash[index],{
                 method:"DELETE"
             })
         })
@@ -63,13 +79,28 @@ async function afficherTravauxModal(){
     });
 }
 
+function retourModal(conteneurForm){
+    const fleche = document.querySelector(".fa-arrow-left");
+        fleche.addEventListener('click', ()=>{
+            conteneurForm.classList.add("hide-form");
+            modale.classList.add("show-modal");
+        })
+}
+    
+function fermerAjout(conteneurForm){
+    const croix = document.querySelector(".icons .fa-xmark");
+    croix.addEventListener('click', ()=>{
+        conteneurForm.classList.add("hide-form");
+    })
+}
 
 // Fonction pour passer a la modale d'ajout de travaux //
 function modalAjout(){
     const btnAjout = document.getElementById("ajout");
     btnAjout.addEventListener("click",()=>{
         console.log("cliqué");
-        modale.innerHTML="";
+        retour = true;
+        modale.classList.remove("show-modal");
         const formulaireAjout = `  <div class="form-ajout">
                                         <div class="icons">
                                         <i class="fa-solid fa-arrow-left"></i>
@@ -98,17 +129,25 @@ function modalAjout(){
                                         </form>
                                     </div>
                                 `
-        const conteneurForm = document.createElement("section");
-        conteneurForm.classList.add("section-addform");
         conteneurForm.innerHTML=formulaireAjout;
-        modale.appendChild(conteneurForm);
-        })
+        sectionModale.appendChild(conteneurForm);
+        while(retour === true){
+        retourModal(conteneurForm)
+        retour = false;
+        }
+        if(retour === false){
+            conteneurForm.classList.remove("hide-form");
+            fermerAjout(conteneurForm);
+        }
+    })
+        
 }
 
 afficherModal()
-fermerModal();
 afficherTravauxModal();
+fermerModal();
 modalAjout();
+
 
 
 
