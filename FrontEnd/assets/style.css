@@ -399,6 +399,16 @@ a{
 
 .section-addform{
 	width: 100%;
+	flex-direction: column;
+	position: absolute;
+	background-color: white;
+	top: 600px;
+	left: 340px;
+	width: 50%;
+	border-radius: 15px;
+	border: 1px black solid;
+	margin-bottom: 20px;
+	z-index: 1;
 }
 
 .form-ajout{
@@ -420,7 +430,7 @@ a{
 }
 
 .form-ajout .icons{
-	margin-top: 0px;
+	margin-top:50px;
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-start;
@@ -454,6 +464,9 @@ a{
 	margin-bottom: 2s0px;
 }
 .form-ajout p{
+	font-size: 26px;
+	text-align: center;
+	font-family: 'Syne';
 	margin-bottom: 50px;
 }
 .form-ajout .add-title{
@@ -523,11 +536,21 @@ a{
 }
 
 .form-ajout button{
+	background-color: #1D6154;
+	width: 60%;
+	color: white;
+	font-size: 16px;
+	font-family: 'Syne';
+	font-weight: 700;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	padding: 8px 25px;
 	margin: auto;
-	margin-top: 40px;
-	margin-left: 40px;
-	width: 80%;
+	margin-left: 80px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
+
 
 .form-ajout .bordure{
 	
@@ -535,4 +558,8 @@ a{
 	border-top: 1px solid #b3b3b3;
 	margin-top: 50px;
 	margin-left: 87px;
+}
+
+.hide-form{
+	display: none!important;
 }
