@@ -181,7 +181,7 @@ function modalAjout(){
                     const category = document.getElementById('categorie').value;
                     const formData = new FormData();
                     
-                    formData.append('image',inputFiles.file.name);
+                    formData.append('image',inputFiles.files[0]);
                     formData.append('title', titre);
                     formData.append('category', category);
                     console.log(formData);
@@ -199,9 +199,8 @@ function modalAjout(){
                 });
                 if (response.ok) {
                     const dataResponse = await response.json();
-                    afficherTravaux(reponse);
-                    
-                    
+                    const listeActualise = new Set(reponse)
+                    afficherTravaux(listeActualise);
                 }
             }catch(error){
                 console.log("une erreur c'est produite lors de la requête :", error);
