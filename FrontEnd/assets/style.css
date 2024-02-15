@@ -139,11 +139,12 @@ li:hover {
 	font-family: 'Syne';
 	font-weight: 700;
 	margin-top: 20px;
-	margin-bottom: 40px;
+	margin-bottom: 60px;
 	border: 1px solid #1D6154;
 	border-radius: 60px;
 	padding: 8px 25px;
-}
+	background-color: white;
+	}
 
 .filters-menu button:hover{
 	background-color: #1D6154;
@@ -159,14 +160,17 @@ li:hover {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+	grid-column-gap: 0px;
+	grid-row-gap: 15px;
 }
 
 .gallery img {
-	width: 100%;
-
+	width: 95%;
 }
+
+.gallery figcaption{
+	margin-top: 10px;
+} 
 
 #contact {
 	width: 50%;
@@ -322,7 +326,7 @@ a{
 	flex-direction: column;
 	position: absolute;
 	background-color: white;
-	top: 600px;
+	top: 520px;
 	left: 340px;
 	width: 50%;
 	border-radius: 15px;
@@ -402,7 +406,7 @@ a{
 	flex-direction: column;
 	position: absolute;
 	background-color: white;
-	top: 600px;
+	top: 470px;
 	left: 340px;
 	width: 50%;
 	border-radius: 15px;
@@ -412,24 +416,29 @@ a{
 }
 
 .form-ajout{
+	position: relative;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 0px;
-	gap: 0px;
+	margin: auto;
+	gap: 10px;
 }	
 
 
-.form-ajout form{
+.form-add form{
 	width: 80%;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	gap: 10px;
+	background-color: white;
+	margin-bottom: 40px;
 }
 
-.form-ajout .icons{
+.form-add .icons{
 	margin-top:50px;
 	display: flex;
 	justify-content: space-around;
@@ -437,43 +446,44 @@ a{
 	gap: 600px;
 }
 
-.form-ajout .fa-arrow-left{
+.form-add .fa-arrow-left{
 	margin-left: 100px;
 	margin-top: -20px;
 	font-size: 20px;
 }
 
-.form-ajout .fa-xmark{
+.form-add .fa-xmark{
 	margin-right: 100px;
 	margin-bottom: 20px;
 	margin-top: -30px;
 	font-size: 20px;
 }
 
-.form-ajout .boite-image{
-	width: 70%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 0px;
-	background-color: #e8f1f6;
-	border-radius: 5px;
-	margin: auto;
-	margin-top: -10px;
-	margin-bottom: 2s0px;
-}
-.form-ajout p{
+.form-add p{
 	font-size: 26px;
 	text-align: center;
 	font-family: 'Syne';
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
-.form-ajout .add-title{
+.form-add .add-title{
 	font-weight: lighter;
 	font-family: 'Syne';
 	margin-top: 20px;
 }
+
+.form-ajout .boite-image{
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #e8f1f6;
+	align-items: center;
+	gap: 10px;
+	border-radius: 5px;
+	margin: auto;
+}
+
+
 
 .boite-image .label-file{
 	color: #306685;
@@ -488,13 +498,14 @@ a{
 
 .boite-image .input-file{
 	position: absolute;
-	top: 235px;
+	top: 100px;
 	opacity: 0;
 }
 
 .boite-image span{
-	margin-bottom: 20px;
+	
 	font-size: 10px;
+	margin-bottom: 20px;
 }
 
 .boite-image .fa-image{
@@ -507,13 +518,12 @@ a{
 .boite-image label{
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	margin-top: 0px;
+
 }
 
 .form-ajout input{
-	width: 25%;
+	width: 35%;
 	padding: 15px 130px;
 	border: none;
 	box-shadow: 2px 2px 6px #c8c8c8;
@@ -522,12 +532,12 @@ a{
 }
 
 .form-ajout label{
-	margin-left : 88px;
 	margin-top: 20px;
+	margin-right: 390px;
 }
 
 .form-ajout .select{
-	width: 70%;
+	width: 81%;
 	padding: 15px 115px;
 	border: none;
 	box-shadow: 2px 2px 6px #c8c8c8;
@@ -546,9 +556,8 @@ a{
 	border-radius: 60px;
 	padding: 8px 25px;
 	margin: auto;
-	margin-left: 80px;
+	margin-left: 70px;
 	margin-top: 30px;
-	margin-bottom: 30px;
 }
 
 
@@ -557,9 +566,15 @@ a{
 	width: 70%;
 	border-top: 1px solid #b3b3b3;
 	margin-top: 50px;
-	margin-left: 87px;
+	margin-left: 0px;
 }
 
 .hide-form{
 	display: none!important;
+}
+
+#appercu{
+	width: 30%;
+	object-fit: cover;
+	margin-bottom: -30px;
 }

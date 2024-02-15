@@ -26,7 +26,6 @@ conteneurForm.classList.add("section-addform");
 
 //Afficher les travaux dans la modale//
 
-
 // Récuperation via l'API //
 const photo = await fetch("http://localhost:5678/api/works")
 .then(photo => photo.json());
@@ -75,11 +74,6 @@ function fermerModal(){
 // Fonction pour effacer un élément de la modale // 
 function effacerTravaux(){       
     const trashes = document.querySelectorAll(".fa-trash-can");
-    let ids =1;
-    for(const trash of trashes){
-        console.log(trash);
-       
-    }   
     trashes.forEach((trash)=>{
     
         trash.addEventListener('click',async event =>{
@@ -98,11 +92,7 @@ function effacerTravaux(){
         
             (target.closest("div").remove())
              
-            const response = await reponse.json()
-            
-            }else{
-                    console.error('Erreur lors de la supression de l\'élément');
-                }}
+            }}
         catch(error){
                  console.error('Erreur lors de la supression de l\'élément,');
             }
@@ -132,20 +122,20 @@ function modalAjout(){
     btnAjout.addEventListener("click",()=>{
         retour = true;
         modale.classList.remove("show-modal");
-        const formulaireAjout = `  <div class="form-ajout">
+        const formulaireAjout = `  <div class="form-add">
                                         <div class="icons">
-                                        <i class="fa-solid fa-arrow-left"></i>
-                                        <i class="fa-solid fa-xmark"></i>
+                                            <i class="fa-solid fa-arrow-left"></i>
+                                            <i class="fa-solid fa-xmark"></i>
                                         </div>
-                                        <p class="add-title">Ajout photo</p>
-                                        <form id="form-ajout" action="#">
-                                            <div class="boite-image">
+                                        <p class="add-title">Ajout photo<p>
+                                        <form class="form-ajout" id="form-ajout" action="#">
+                                            <div class="boite-image" id="boite-image">
+                                                <img id="appercu" class="invisible" src="" alt="">
                                                 <i class="fa-regular fa-image"></i>
                                                 <label for="image" class="label-file">+ Ajouter photo</label>
-                                                <input type="file" class="input-file id="image" name="image" accept="jpg, png>
-                                                <img src="" alt="appercu" title="appercu" id="appercu" class="appercu"/>
-                                                <span>jpg. png : 4mo max</span>
-                                            </div>    
+                                                <input type="file" class="input-file id="image" name="image" accept="jpg,png">
+                                                <span>jpg. png : 4mo max</span> 
+                                            </div>
                                             <label for="titre">Titre</label>
                                             <input type="text" id="titre" name="titre">
                                             <label for="categorie">Catégorie</label>
@@ -155,9 +145,10 @@ function modalAjout(){
                                                 <option value="2">Appartements</option>
                                                 <option value="3">Hotels & restaurants</option>
                                             </select>
-                                            <div class=bordure>
+                                            <div class="bordure">
                                                 <button id="valider" type="submit">Valider</button>
-                                            </div>        
+                                            </div>
+                                                   
                                         </form>
                                     </div>
                                 `
@@ -167,7 +158,21 @@ function modalAjout(){
         // Gestion de l'ajout de travaux //
         const formEL = document.getElementById("form-ajout");
         const inputFiles =document.querySelector(".boite-image .input-file");
-       
+        const appercu = document.getElementById("appercu");
+        const iconeImage = document.querySelector(".fa-image");
+        const span = document.querySelector(".form-ajout span");
+        const titreAjout = document.querySelector(".form-ajout .label-file");
+        
+        inputFiles.addEventListener('change',(chargement)=>{
+                    appercu.classList.remove("invisible");
+                    const pict = chargement.target.files[0];
+                    appercu.src = URL.createObjectURL(pict);
+                    iconeImage.classList.add("invisible");
+                    span.classList.add("invisible");
+                    titreAjout.classList.remove("label-file");
+                    titreAjout.innerText = "";
+                    titreAjout.classList.add("invisible");
+                })
         
             formEL.addEventListener('submit', async e=>{
                 e.preventDefault();
@@ -176,7 +181,7 @@ function modalAjout(){
                     const category = document.getElementById('categorie').value;
                     const formData = new FormData();
                     
-                    formData.append('image',inputFiles.files[0]);
+                    formData.append('image',inputFiles.file.name);
                     formData.append('title', titre);
                     formData.append('category', category);
                     console.log(formData);
@@ -194,6 +199,8 @@ function modalAjout(){
                 });
                 if (response.ok) {
                     const dataResponse = await response.json();
+                    afficherTravaux(reponse);
+                    
                     
                 }
             }catch(error){

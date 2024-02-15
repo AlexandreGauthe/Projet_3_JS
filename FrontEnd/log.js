@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let log = document.getElementById('email');
     let pass = document.getElementById('password');
     let btnSubmit = document.getElementById('connexion');
-    console.log(btnSubmit);
     btnSubmit.addEventListener('click', async event =>{
         event.preventDefault();
         if (verifierLogs){

@@ -39,7 +39,6 @@ function afficherToutTravaux(){
 //  Effacement de la gallerie et affichage de la liste d'origine
         document.querySelector(".gallery").innerHTML="";
         afficherTravaux(reponse);
-        console.log("tout les travaux sont affichés")
     })
 
 }
@@ -55,15 +54,13 @@ function afficheObjets(){
 
 // Ecoute du clic sur le bouton //   
     btn_objets.addEventListener("click", ()=>{
-        console.log("Seuls les objets sont affichés");
-
+        
 //  On tri la liste pour n'avoir que les objets //     
         const listeObjets = reponse.filter(function (reponse){
             return reponse.category.name === "Objets" ;
                 });
 
 //  Effacement de la gallerie et affichage de la liste triée //    
-    console.log(listeObjets)        
     document.querySelector(".gallery").innerHTML="";
     afficherTravaux(listeObjets);  
 })
@@ -79,15 +76,13 @@ function afficheAppartements(){
 
 // Ecoute du clic sur le bouton //    
     btn_appartement.addEventListener("click", ()=>{
-        console.log("Seuls les appartements sont affichés");
-
+        
 // On tri la liste pour n'avoir que les appartements //        
         const listeAppart = reponse.filter(function (reponse){
             return reponse.category.name === "Appartements" ;
                 });
 
 //  Effacement de la gallerie et affichage de la liste triée //                  
-        console.log(listeAppart)        
         document.querySelector(".gallery").innerHTML="";
         afficherTravaux(listeAppart);  
     })
@@ -104,15 +99,13 @@ function afficherHotel(){
 
 // Ecoute du clic sur le bouton //    
     btn_hotel.addEventListener("click", ()=>{
-        console.log("Seuls les hôtels et restaurants sont affichés");
-        
+     
 // On tri la liste pour n'avoir que les hotels et restaurants //        
         const listeHotel = reponse.filter(function (reponse){
             return reponse.category.name === "Hotels & restaurants" ;
                 });
         
 //  Effacement de la gallerie et affichage de la liste triée //          
-        console.log(listeHotel)        
         document.querySelector(".gallery").innerHTML="";
         afficherTravaux(listeHotel);  
     })
