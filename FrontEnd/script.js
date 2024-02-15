@@ -1,8 +1,16 @@
 export const gallery = document.querySelector(".gallery");
 export const reponse = await fetch("http://localhost:5678/api/works").then(reponse => reponse.json());
 // Fonction pour afficher les differernts travaux depuis l'API //
-export function afficherTravaux(reponse){
 
+export  async function actualiserTravaux(){
+    gallery.innerHTML="";
+    const actu = await fetch("http://localhost:5678/api/works").then(actu => actu.json());
+    afficherTravaux(actu);
+}
+
+
+export function afficherTravaux(reponse){
+   
 //  Boucle for pour parcourir tout les travaux //
     for (let i = 0; i < reponse.length; i++){
 

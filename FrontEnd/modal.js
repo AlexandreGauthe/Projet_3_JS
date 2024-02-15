@@ -1,4 +1,4 @@
-import { afficherTravaux,reponse,gallery} from "./script.js";
+import { afficherTravaux,reponse,gallery,actualiserTravaux} from "./script.js";
 const token =  window.localStorage.getItem("token");
 const userId = window.localStorage.getItem("userId");
 
@@ -25,7 +25,7 @@ const conteneurForm = document.createElement("section");
 conteneurForm.classList.add("section-addform");
 
 //Afficher les travaux dans la modale//
-
+async function afficherTravauxModal(){
 // Récuperation via l'API //
 const photo = await fetch("http://localhost:5678/api/works")
 .then(photo => photo.json());
@@ -54,7 +54,8 @@ const travauxId = photo.map(photo =>photo.id);
         vignette.appendChild(imageModal);
         modalGrid.appendChild(vignette);
     }
-
+    effacerTravaux();
+}
 // Gestion de l'ouverture et fermeture de la modale aux differents clics //
 function afficherModal(){
 
@@ -69,7 +70,6 @@ function fermerModal(){
         modale.classList.remove("show-modal");
     }    
 )}
-
 
 // Fonction pour effacer un élément de la modale // 
 function effacerTravaux(){       
@@ -91,6 +91,7 @@ function effacerTravaux(){
         if (response.ok){
         
             (target.closest("div").remove())
+            actualiserTravaux();
              
             }}
         catch(error){
@@ -116,6 +117,12 @@ function fermerAjout(conteneurForm){
     })
 }
 
+async function actualiserTravauxModal(){
+    const modalGrid = document.querySelector(".modal-grid");
+    modalGrid.innerHTML="";
+    const actu = await fetch("http://localhost:5678/api/works").then(actu => actu.json());
+    afficherTravauxModal(actu);
+}
 // Fonction pour passer a la modale d'ajout de travaux //
 function modalAjout(){
     const btnAjout = document.getElementById("ajout");
@@ -198,9 +205,9 @@ function modalAjout(){
     
                 });
                 if (response.ok) {
-                    const dataResponse = await response.json();
-                    const listeActualise = new Set(reponse)
-                    afficherTravaux(listeActualise);
+                    await response.json();
+                    actualiserTravaux();
+                    actualiserTravauxModal();
                 }
             }catch(error){
                 console.log("une erreur c'est produite lors de la requête :", error);
@@ -224,9 +231,9 @@ function modalAjout(){
     })
         
 }
-
+afficherTravauxModal();
 afficherModal();
-effacerTravaux();
+
 fermerModal();
 modalAjout();
 
