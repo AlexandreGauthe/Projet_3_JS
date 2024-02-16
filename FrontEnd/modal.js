@@ -1,4 +1,4 @@
-import { afficherTravaux,reponse,gallery,actualiserTravaux} from "./script.js";
+import { afficherTravaux,reponse,gallery,actualiserTravaux,categoriesIdRecuperes,categoriesRecuperes} from "./script.js";
 const token =  window.localStorage.getItem("token");
 const userId = window.localStorage.getItem("userId");
 
@@ -148,9 +148,6 @@ function modalAjout(){
                                             <label for="categorie">Catégorie</label>
                                             <select class="select" name="categorie" id="categorie">
                                                 <option value="">--Choisissez une catégorie--</option>
-                                                <option value="1">Objets</option>
-                                                <option value="2">Appartements</option>
-                                                <option value="3">Hotels & restaurants</option>
                                             </select>
                                             <div class="bordure">
                                                 <button id="valider" type="submit">Valider</button>
@@ -161,6 +158,15 @@ function modalAjout(){
                                 `
         conteneurForm.innerHTML=formulaireAjout;
         sectionModale.appendChild(conteneurForm);
+        
+        // Ajout des différents catégories via l'API //
+        const selecteur = document.querySelector(".select");
+        for (let i = 0; i < categoriesIdRecuperes.length; i++){
+                const categorie = document.createElement("option");
+                categorie.setAttribute("value", categoriesIdRecuperes[i]);
+                categorie.innerText=categoriesRecuperes[i];
+                selecteur.appendChild(categorie);
+                }
         
         // Gestion de l'ajout de travaux //
         const formEL = document.getElementById("form-ajout");

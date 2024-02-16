@@ -5,8 +5,8 @@ export const reponse = await fetch("http://localhost:5678/api/works").then(repon
 // Récupération des différentes catégories pour générer les boutons de filtres //
 const categories = reponse.map(reponse => reponse.category.name);
 const categoriesID= reponse.map(reponse => reponse.category.id);
-const categoriesRecuperes = Array.from (new Set(categories));
-const categoriesIdRecuperes = Array.from(new Set(categoriesID));
+export const categoriesRecuperes = Array.from (new Set(categories));
+export const categoriesIdRecuperes = Array.from(new Set(categoriesID));
 
 //Génération des boutons en itérant sur les ID de catégories//
 const conteneurFiltres = document.querySelector(".filters-menu");
