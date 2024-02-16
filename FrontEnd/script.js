@@ -1,5 +1,25 @@
+// Récuperation de la gallery puis Requète GET pour récupérér les travaux via l'API //
 export const gallery = document.querySelector(".gallery");
 export const reponse = await fetch("http://localhost:5678/api/works").then(reponse => reponse.json());
+
+// Récupération des différentes catégories pour générer les boutons de filtres //
+const categories = reponse.map(reponse => reponse.category.name);
+const categoriesID= reponse.map(reponse => reponse.category.id);
+const categoriesRecuperes = Array.from (new Set(categories));
+const categoriesIdRecuperes = Array.from(new Set(categoriesID));
+console.log(categoriesRecuperes);
+console.log(categoriesIdRecuperes);
+
+//Génération des boutons en itérant sur les ID de catégories//
+const conteneurFiltres = document.querySelector(".filters-menu");
+for(let i = 0; i< categoriesIdRecuperes.length; i++){
+    const bouton = document.createElement("button")
+    bouton.setAttribute("id", categoriesRecuperes[i]);
+    bouton.setAttribute("type", "button");
+    bouton.classList.add("visible");
+    bouton.innerText = categoriesRecuperes[i];
+    conteneurFiltres.appendChild(bouton);
+}
 // Fonction pour afficher les differernts travaux depuis l'API //
 
 export  async function actualiserTravaux(){
@@ -58,7 +78,7 @@ afficherToutTravaux();
 function afficheObjets(){
 
 // Récuperation du bouton //    
-    const btn_objets = document.getElementById("objet");
+    const btn_objets = document.getElementById("Objets");
 
 // Ecoute du clic sur le bouton //   
     btn_objets.addEventListener("click", ()=>{
@@ -80,7 +100,7 @@ afficheObjets();
 function afficheAppartements(){
 
 // Récuperation du bouton //    
-    const btn_appartement = document.getElementById("appartement");
+    const btn_appartement = document.getElementById("Appartements");
 
 // Ecoute du clic sur le bouton //    
     btn_appartement.addEventListener("click", ()=>{
@@ -103,7 +123,7 @@ afficheAppartements();
 function afficherHotel(){
     
 // Récuperation du bouton //    
-    const btn_hotel = document.getElementById("hotel");
+    const btn_hotel = document.getElementById("Hotels & restaurants");
 
 // Ecoute du clic sur le bouton //    
     btn_hotel.addEventListener("click", ()=>{
