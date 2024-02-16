@@ -7,19 +7,32 @@ const categories = reponse.map(reponse => reponse.category.name);
 const categoriesID= reponse.map(reponse => reponse.category.id);
 const categoriesRecuperes = Array.from (new Set(categories));
 const categoriesIdRecuperes = Array.from(new Set(categoriesID));
-console.log(categoriesRecuperes);
-console.log(categoriesIdRecuperes);
 
 //Génération des boutons en itérant sur les ID de catégories//
 const conteneurFiltres = document.querySelector(".filters-menu");
 for(let i = 0; i< categoriesIdRecuperes.length; i++){
-    const bouton = document.createElement("button")
-    bouton.setAttribute("id", categoriesRecuperes[i]);
-    bouton.setAttribute("type", "button");
-    bouton.classList.add("visible");
-    bouton.innerText = categoriesRecuperes[i];
-    conteneurFiltres.appendChild(bouton);
+    const boutons = document.createElement("button")
+    boutons.setAttribute("id", categoriesRecuperes[i]);
+    boutons.setAttribute("type", "button");
+    boutons.classList.add("visible");
+    boutons.innerText = categoriesRecuperes[i];
+    conteneurFiltres.appendChild(boutons);
 }
+
+// Gestion des différents filtres //
+const boutonsFiltres = Array.from(document.querySelectorAll(".filters-menu button"));
+const boutonsEfface = boutonsFiltres.splice(0, 1);
+boutonsFiltres.forEach((bouton) =>{
+      bouton.addEventListener('click', (event)=>{
+            const listeFiltre =reponse.filter(function (reponse){
+            return reponse.category.name === event.target.id;
+            });
+        gallery.innerHTML="";
+        afficherTravaux(listeFiltre);    
+    })
+})
+
+
 // Fonction pour afficher les differernts travaux depuis l'API //
 
 export  async function actualiserTravaux(){
@@ -74,73 +87,6 @@ function afficherToutTravaux(){
 // Appel de la fonction //
 afficherToutTravaux();
 
-// Fonction pour n'afficher que les objets
-function afficheObjets(){
-
-// Récuperation du bouton //    
-    const btn_objets = document.getElementById("Objets");
-
-// Ecoute du clic sur le bouton //   
-    btn_objets.addEventListener("click", ()=>{
-        
-//  On tri la liste pour n'avoir que les objets //     
-        const listeObjets = reponse.filter(function (reponse){
-            return reponse.category.name === "Objets" ;
-                });
-
-//  Effacement de la gallerie et affichage de la liste triée //    
-    document.querySelector(".gallery").innerHTML="";
-    afficherTravaux(listeObjets);  
-})
-
-}
-afficheObjets();
-
-// Fonction pour n'afficher que les appartements
-function afficheAppartements(){
-
-// Récuperation du bouton //    
-    const btn_appartement = document.getElementById("Appartements");
-
-// Ecoute du clic sur le bouton //    
-    btn_appartement.addEventListener("click", ()=>{
-        
-// On tri la liste pour n'avoir que les appartements //        
-        const listeAppart = reponse.filter(function (reponse){
-            return reponse.category.name === "Appartements" ;
-                });
-
-//  Effacement de la gallerie et affichage de la liste triée //                  
-        document.querySelector(".gallery").innerHTML="";
-        afficherTravaux(listeAppart);  
-    })
-    
-}
-// Appel de la fonction    
-afficheAppartements();
-
-// Fonction pour n'afficher que les hotels et restaurants
-function afficherHotel(){
-    
-// Récuperation du bouton //    
-    const btn_hotel = document.getElementById("Hotels & restaurants");
-
-// Ecoute du clic sur le bouton //    
-    btn_hotel.addEventListener("click", ()=>{
-     
-// On tri la liste pour n'avoir que les hotels et restaurants //        
-        const listeHotel = reponse.filter(function (reponse){
-            return reponse.category.name === "Hotels & restaurants" ;
-                });
-        
-//  Effacement de la gallerie et affichage de la liste triée //          
-        document.querySelector(".gallery").innerHTML="";
-        afficherTravaux(listeHotel);  
-    })
-}
-
-// Appel de la fonction    
-afficherHotel();
 
 // Page version admin //
 
