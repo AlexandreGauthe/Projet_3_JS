@@ -1,10 +1,11 @@
-import { afficherTravaux,reponse,gallery,actualiserTravaux,categoriesIdRecuperes,categoriesRecuperes} from "./script.js";
+import {actualiserTravaux,categoriesIdRecuperes,categoriesRecuperes} from "./script.js";
 const token =  window.localStorage.getItem("token");
 const userId = window.localStorage.getItem("userId");
 
 // Génération de la modale//
 let retour = true;
 const boite = document.createElement("div");
+boite.setAttribute('id','boite');
 const modalModif =`
                             <div class="gallery-modal">
                                 <i class="fa-solid fa-xmark"></i>
@@ -19,10 +20,12 @@ const sectionModale = document.querySelector(".modal");
 boite.innerHTML=modalModif;
 sectionModale.appendChild(boite);
 const modale = document.querySelector(".gallery-modal");
+modale.setAttribute('id', 'modpic');
 const iconeClose = document.querySelector(".fa-xmark");
 const addMenu = document.getElementById("add-menu");
 const conteneurForm = document.createElement("section");
 conteneurForm.classList.add("section-addform");
+const iconeBandeau = document.getElementById("modif");
 
 //Afficher les travaux dans la modale//
 async function afficherTravauxModal(){
@@ -57,20 +60,38 @@ const travauxId = photo.map(photo =>photo.id);
     effacerTravaux();
 }
 // Gestion de l'ouverture et fermeture de la modale aux differents clics //
-function afficherModal(){
+export function afficherModal(){
 
     addMenu.addEventListener("click", ()=>{
-        modale.classList.add("show-modal");
+        modale.classList.add("show-modal");   
     })
 }
 
+
 function fermerModal(){
 
-    iconeClose.addEventListener("click",()=>{
+    iconeClose.addEventListener("click",(e)=>{
         modale.classList.remove("show-modal");
+        let ouverte = false;   
     }    
 )}
 
+// Affichage de la modale via le bandeau //
+function afficherModalBandeau(){
+    if (iconeBandeau){
+    iconeBandeau.addEventListener("click", ()=>{
+    modale.classList.add("show-modal");
+    })}
+    }
+
+// Fermeture en cas de clic à coté de la modale //
+boite.addEventListener('mouseup', (e)=>{
+   if(boite.contains(e.target) || sectionModale.contains(e.target)){
+        console.log("cliqué");
+    } else if( e.target.srcElement.id ===('introduction') || e.target.srcElement.id ===('portfolio') || e.target.srcElement.id ===('contact')){
+        modale.classList.remove('show-modal');
+    } 
+})
 // Fonction pour effacer un élément de la modale // 
 function effacerTravaux(){       
     const trashes = document.querySelectorAll(".fa-trash-can");
@@ -175,6 +196,8 @@ function modalAjout(){
         const iconeImage = document.querySelector(".fa-image");
         const span = document.querySelector(".form-ajout span");
         const titreAjout = document.querySelector(".form-ajout .label-file");
+        const champTitre = document.getElementById("titre");
+        const champCategorie = document.getElementById("categorie");
         
         inputFiles.addEventListener('change',(chargement)=>{
                     appercu.classList.remove("invisible");
@@ -214,6 +237,14 @@ function modalAjout(){
                     await response.json();
                     actualiserTravaux();
                     actualiserTravauxModal();
+                    appercu.classList.add("invisible");
+                    iconeImage.classList.remove("invisible");
+                    span.classList.remove("invisible");
+                    titreAjout.classList.add("label-file");
+                    titreAjout.innerText = "Ajout photo";
+                    titreAjout.classList.remove("invisible");
+                    champTitre.value="";
+                    champCategorie.value="";
                 }
             }catch(error){
                 console.log("une erreur c'est produite lors de la requête :", error);
@@ -239,8 +270,8 @@ function modalAjout(){
 }
 afficherTravauxModal();
 afficherModal();
-
 fermerModal();
+afficherModalBandeau();
 modalAjout();
 
 

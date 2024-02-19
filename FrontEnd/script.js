@@ -94,6 +94,7 @@ const admin =document.getElementById('admin');
 const filterMenu = document.querySelector('.filters-menu');
 const menuModifier = document.querySelector(".section-admin .invisible");
 const modale = document.querySelector(".gallery-modal");
+const bandeau = document.querySelector(".bandeau-edition");
 
 function verifierStatut(){
     let token = window.localStorage.getItem("token");
@@ -101,13 +102,19 @@ function verifierStatut(){
         admin.innerText= "Logout";
         menuModifier.classList.remove("invisible");
         filterMenu.classList.toggle("invisible");
-        
-
-
+        const textModif = document.createElement("span");
+        textModif.innerText="Mode édition"
+        const iconeModif = document.createElement("i");
+        iconeModif.classList.add("fa-regular");
+        iconeModif.classList.add("fa-pen-to-square")
+        iconeModif.setAttribute("id","modif");
+        bandeau.appendChild(iconeModif);
+        bandeau.appendChild(textModif);
     }else{ admin.innerText="Login";
         filterMenu.classList.toggle("filers-menu");
-        
-}}
+        bandeau.classList.remove("bandeau-edition");
+        bandeau.classList.add("invisble");
+    }}
 
 verifierStatut();
 
@@ -116,6 +123,8 @@ admin.addEventListener("click",() =>{
     verifierStatut();
     if(admin.innerText ==="Logout"){
     admin.href ="index.html";
+    bandeau.classList.remove("bandeau-edition");
+    bandeau.classList.add("invisble");
     window.localStorage.removeItem("token");
-    }
+   }
 })

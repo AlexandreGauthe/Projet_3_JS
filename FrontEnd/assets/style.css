@@ -53,11 +53,31 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
 header {
+	width: 100%;
+}
+
+header .bandeau-edition{
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	font-size: 16px;
+	color: white;
+	background-color: black;
+	font-family: 'Syne';
+	padding: 20px 0px;
+	margin-left: -150px;
+}
+
+header .bandeau-menu{
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
+
 }
+
 section {
 	margin: 50px 0
 }
