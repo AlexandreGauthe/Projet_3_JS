@@ -107,6 +107,7 @@ function verifierStatut(){
         menuModifier.classList.remove("invisible");
         filterMenu.classList.toggle("invisible");
         const textModif = document.createElement("span");
+        textModif.setAttribute('id','textModif');
         textModif.innerText="Mode édition"
         const iconeModif = document.createElement("i");
         iconeModif.classList.add("fa-regular");

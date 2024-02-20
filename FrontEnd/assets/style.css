@@ -59,7 +59,7 @@ header {
 }
 
 header .bandeau-edition{
-	width: 100vw;
+	width: 150vw;
 	display: flex;
 	justify-content: center;
 	gap: 20px;
@@ -68,7 +68,16 @@ header .bandeau-edition{
 	background-color: black;
 	font-family: 'Syne';
 	padding: 20px 0px;
-	margin-left: -150px;
+	margin-left: -400px;
+}
+
+#modif{
+	text-align: center;
+}
+
+#textModif{
+	text-align: center;
+	margin-right: 200px;
 }
 
 header .bandeau-menu{
