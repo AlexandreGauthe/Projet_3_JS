@@ -33,15 +33,14 @@ boutonsFiltres.forEach((bouton) =>{
 })
 
 
-// Fonction pour afficher les differernts travaux depuis l'API //
-
+// Fonction pour raffraichir la liste des travaux de l'API //
 export  async function actualiserTravaux(){
     gallery.innerHTML="";
     const actu = await fetch("http://localhost:5678/api/works").then(actu => actu.json());
     afficherTravaux(actu);
 }
 
-
+//Fonction pour afficher les différents travaux de l'API dans la gallerie principale//
 export function afficherTravaux(reponse){
    
 //  Boucle for pour parcourir tout les travaux //
@@ -90,14 +89,19 @@ afficherToutTravaux();
 
 // Page version admin //
 
+// Initialisation des variables nécéssaires //
 const admin =document.getElementById('admin');
 const filterMenu = document.querySelector('.filters-menu');
 const menuModifier = document.querySelector(".section-admin .invisible");
-const modale = document.querySelector(".gallery-modal");
 const bandeau = document.querySelector(".bandeau-edition");
 
+// Fonction pour verifier le statut de connexion de l'administrateur //
 function verifierStatut(){
+
+// Récupération du token stocké en local apres le log//    
     let token = window.localStorage.getItem("token");
+
+// Vérification de la présence du token et passage en mode Admin le cas échéant //
     if (token !== null){
         admin.innerText= "Logout";
         menuModifier.classList.remove("invisible");
@@ -110,6 +114,8 @@ function verifierStatut(){
         iconeModif.setAttribute("id","modif");
         bandeau.appendChild(iconeModif);
         bandeau.appendChild(textModif);
+
+// Si il n'y a pas de token alors la page est en mode déconectée //       
     }else{ admin.innerText="Login";
         filterMenu.classList.toggle("filers-menu");
         bandeau.classList.remove("bandeau-edition");
@@ -118,6 +124,7 @@ function verifierStatut(){
 
 verifierStatut();
 
+// Géstion du raffraichissement de la page après déconnexion //
 admin.addEventListener("click",() =>{
 
     verifierStatut();

@@ -1,11 +1,6 @@
-
+// Fonction de vérification du Login et du mot de passe//
 function verifierLogs(){
-    let messageErreur = document.getElementById('error');
     if( log.value !== "sophie.bluel@test.tld" || pass.value !== "S0phie" ){
-        messageErreur.innerText ="Erreur dans l’identifiant ou le mot de passe";
-        setTimeout(function(){
-            messageErreur.innerText="";
-        },2000)
         return false;
     }else{
         return true;
@@ -15,7 +10,6 @@ function verifierLogs(){
 
 document.addEventListener('DOMContentLoaded', ()=>{
     let messageErreur = document.getElementById('error');
-    let logIn = document.querySelector('form');
     let log = document.getElementById('email');
     let pass = document.getElementById('password');
     let btnSubmit = document.getElementById('connexion');
@@ -41,10 +35,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 if (response.ok) {
                     const dataResponse = await response.json();
                     localStorage.setItem("token", dataResponse.token);
-                    localStorage.setItem("userId", dataResponse.userId);
                     window.location.href = "index.html";
                 } else {
-                    messageErreur.innerText = "Adresse mail ou mot de passe incorrect";
+                    messageErreur.innerText = "Adresse mail ou mot de passe incorrect"
+                    setTimeout(function(){
+                        messageErreur.innerText="";
+                    },2000);
                 }
             } catch (error){
                 console.error("Une erreur s'est produite lors de la requête :", error);

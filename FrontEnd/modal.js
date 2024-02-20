@@ -1,8 +1,15 @@
+// Import des Varialbes et fonctions nécéssaires//
 import {actualiserTravaux,categoriesIdRecuperes,categoriesRecuperes} from "./script.js";
-const token =  window.localStorage.getItem("token");
-const userId = window.localStorage.getItem("userId");
 
-// Génération de la modale//
+// Récupération du token depuis le LocalStorage//
+const token =  window.localStorage.getItem("token");
+
+const iconeBandeau = document.getElementById("modif");
+const galleriePrinc = document.querySelector(".gallery");
+const portfolio = document.getElementById("portfolio");
+const intro = document.getElementById("introduction");
+
+// Génération de la modale et des differents éléments nécéssaire à celle-çi//
 let retour = true;
 const boite = document.createElement("div");
 boite.setAttribute('id','boite');
@@ -25,16 +32,12 @@ const iconeClose = document.querySelector(".fa-xmark");
 const addMenu = document.getElementById("add-menu");
 const conteneurForm = document.createElement("section");
 conteneurForm.classList.add("section-addform");
-const iconeBandeau = document.getElementById("modif");
 
 //Afficher les travaux dans la modale//
 async function afficherTravauxModal(){
 // Récuperation via l'API //
 const photo = await fetch("http://localhost:5678/api/works")
 .then(photo => photo.json());
-const travauxId = photo.map(photo =>photo.id);
-
-
 
 //  Boucle for pour parcourir tout les travaux //
     for (let i = 0; i < photo.length; i++){
@@ -70,33 +73,32 @@ export function afficherModal(){
 
 function fermerModal(){
 
-    iconeClose.addEventListener("click",(e)=>{
-        modale.classList.remove("show-modal");
-        let ouverte = false;   
-    }    
-)}
+    document.addEventListener("click",(e)=>{
+        let elemClick = e.target;
+        
+            if (elemClick === iconeClose){
+                modale.classList.remove("show-modal");
+            }
+            else if (elemClick === galleriePrinc || elemClick === portfolio || elemClick === intro){
+               modale.classList.remove("show-modal");
+              
+            }
+})}
 
 // Affichage de la modale via le bandeau //
 function afficherModalBandeau(){
     if (iconeBandeau){
-    iconeBandeau.addEventListener("click", ()=>{
-    modale.classList.add("show-modal");
-    })}
+        iconeBandeau.addEventListener("click", ()=>{
+        modale.classList.add("show-modal");
+        })
     }
+}
 
-// Fermeture en cas de clic à coté de la modale //
-boite.addEventListener('mouseup', (e)=>{
-   if(boite.contains(e.target) || sectionModale.contains(e.target)){
-        console.log("cliqué");
-    } else if( e.target.srcElement.id ===('introduction') || e.target.srcElement.id ===('portfolio') || e.target.srcElement.id ===('contact')){
-        modale.classList.remove('show-modal');
-    } 
-})
+
 // Fonction pour effacer un élément de la modale // 
 function effacerTravaux(){       
     const trashes = document.querySelectorAll(".fa-trash-can");
     trashes.forEach((trash)=>{
-    
         trash.addEventListener('click',async event =>{
             const target = event.target;
         
@@ -104,8 +106,7 @@ function effacerTravaux(){
         const response = await fetch('http://localhost:5678/api/works/'+trash.dataset.id,{
         method:'DELETE',
         headers: {
-                'Authorization': 'Bearer '  +token,
-                'UserId' : userId
+                'Authorization': 'Bearer '  +token
                 }
                 
             })
@@ -118,11 +119,10 @@ function effacerTravaux(){
         catch(error){
                  console.error('Erreur lors de la supression de l\'élément,');
             }
-       
     })}
 )}
 
-
+// Retour sur la modal pour effacer les travaux au clic sur la fleche //
 function retourModal(conteneurForm){
         const fleche = document.querySelector(".fa-arrow-left");
         fleche.addEventListener('click', ()=>{
@@ -130,7 +130,8 @@ function retourModal(conteneurForm){
             modale.classList.add("show-modal");
         })
 }
-    
+
+// Fermeture de la modale d'ajout au clic sur la croix //
 function fermerAjout(conteneurForm){
     const croix = document.querySelector(".icons .fa-xmark");
     croix.addEventListener('click', ()=>{
@@ -138,12 +139,14 @@ function fermerAjout(conteneurForm){
     })
 }
 
+// Fonction pour actualiser la grille des travaux de la modal avec la liste de l'API //
 async function actualiserTravauxModal(){
     const modalGrid = document.querySelector(".modal-grid");
     modalGrid.innerHTML="";
     const actu = await fetch("http://localhost:5678/api/works").then(actu => actu.json());
     afficherTravauxModal(actu);
 }
+
 // Fonction pour passer a la modale d'ajout de travaux //
 function modalAjout(){
     const btnAjout = document.getElementById("ajout");
@@ -251,11 +254,7 @@ function modalAjout(){
             }
                 
         })
-            
-            
-            
-    
-
+        
         // Gestion du passage d'une modale à l'autre //
         while(retour === true){
         retourModal(conteneurForm)
@@ -266,8 +265,8 @@ function modalAjout(){
             fermerAjout(conteneurForm);
         }
     })
-        
 }
+// Appels des fonctions//
 afficherTravauxModal();
 afficherModal();
 fermerModal();
