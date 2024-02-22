@@ -271,7 +271,6 @@ a{
 	margin-top: 242px;
 	margin-bottom: 60px;
 	margin-left: 50px;
-	
 }
 
 .formulaire form{
@@ -371,12 +370,13 @@ a{
 	margin-bottom: 20px;
 	z-index: 1;
 }
+
 .gallery-modal p{
 	font-size: 26px;
 	text-align: center;
 	font-family: 'Syne';
 	margin-top: 20px;
-	}
+}
 
 .modal-grid{
 	margin-top: 50px;
