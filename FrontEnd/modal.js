@@ -174,6 +174,7 @@ function modalAjout(){
                                                 <option value="">--Choisissez une catégorie--</option>
                                             </select>
                                             <div class="bordure">
+                                                <p id="form-error"><p>
                                                 <button id="valider" type="submit">Valider</button>
                                             </div>
                                                    
@@ -192,6 +193,8 @@ function modalAjout(){
                 selecteur.appendChild(categorie);
                 }
         
+        
+
         // Gestion de l'ajout de travaux //
         const formEL = document.getElementById("form-ajout");
         const inputFiles =document.querySelector(".boite-image .input-file");
@@ -201,7 +204,9 @@ function modalAjout(){
         const titreAjout = document.querySelector(".form-ajout .label-file");
         const champTitre = document.getElementById("titre");
         const champCategorie = document.getElementById("categorie");
+        const formError = document.getElementById("form-error") ;
         
+       
         inputFiles.addEventListener('change',(chargement)=>{
                     appercu.classList.remove("invisible");
                     const pict = chargement.target.files[0];
@@ -219,11 +224,18 @@ function modalAjout(){
                     const titre = document.getElementById('titre').value;
                     const category = document.getElementById('categorie').value;
                     const formData = new FormData();
-                    
                     formData.append('image',inputFiles.files[0]);
                     formData.append('title', titre);
                     formData.append('category', category);
-                    console.log(formData);
+                    
+                    // Vérification des champs //
+                    if(titre === "" || category === "" || inputFiles.files[0] === undefined){
+                        formError.innerText="Un ou plusieurs champs ne sont pas remplis"
+                        setTimeout(function(){
+                            formError.innerText="";
+                        },2000);
+                    }
+                  
                 
                 try{
                 

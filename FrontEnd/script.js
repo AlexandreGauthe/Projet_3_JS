@@ -22,16 +22,42 @@ for(let i = 0; i< categoriesIdRecuperes.length; i++){
 // Gestion des différents filtres //
 const boutonsFiltres = Array.from(document.querySelectorAll(".filters-menu button"));
 const boutonsEfface = boutonsFiltres.splice(0, 1);
-boutonsFiltres.forEach((bouton) =>{
+boutonsFiltres.forEach((bouton,index) =>{
       bouton.addEventListener('click', (event)=>{
-            const listeFiltre =reponse.filter(function (reponse){
-            return reponse.category.name === event.target.id;
+                const listeFiltre =reponse.filter(function (reponse){
+                return reponse.category.name === event.target.id;
             });
         gallery.innerHTML="";
         afficherTravaux(listeFiltre);    
     })
 })
 
+// Coloration au clic //
+const boutonsMenuFiltres = document.querySelectorAll(".filters-menu button");
+const dernierBouton = boutonsMenuFiltres[boutonsMenuFiltres.length-1];
+console.log(boutonsMenuFiltres);
+boutonsMenuFiltres.forEach((bouton) =>{
+    bouton.addEventListener('click',()=>{
+        bouton.style.backgroundColor="#1D6154";
+        bouton.style.color="white";
+        if(bouton.previousElementSibling){
+            bouton.previousElementSibling.style.backgroundColor="white";
+            bouton.previousElementSibling.style.color="#1D6154";
+        }
+        if(bouton.nextElementSibling){
+            bouton.nextElementSibling.style.backgroundColor="white";
+            bouton.nextElementSibling.style.color="#1D6154";
+        }
+        if(!bouton.nextElementSibling){
+            boutonsMenuFiltres[0].style.backgroundColor="white";
+            boutonsMenuFiltres[0].style.color="#1D6154";
+        }
+        if(!bouton.previousElementSibling){
+            dernierBouton.style.backgroundColor="white";
+            dernierBouton.style.color="#1D6154";
+        }
+    })
+})
 
 // Fonction pour raffraichir la liste des travaux de l'API //
 export  async function actualiserTravaux(){
