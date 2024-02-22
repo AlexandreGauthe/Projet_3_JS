@@ -34,30 +34,23 @@ boutonsFiltres.forEach((bouton,index) =>{
 
 // Coloration au clic //
 const boutonsMenuFiltres = document.querySelectorAll(".filters-menu button");
-const dernierBouton = boutonsMenuFiltres[boutonsMenuFiltres.length-1];
 console.log(boutonsMenuFiltres);
-boutonsMenuFiltres.forEach((bouton) =>{
-    bouton.addEventListener('click',()=>{
-        bouton.style.backgroundColor="#1D6154";
-        bouton.style.color="white";
-        if(bouton.previousElementSibling){
-            bouton.previousElementSibling.style.backgroundColor="white";
-            bouton.previousElementSibling.style.color="#1D6154";
-        }
-        if(bouton.nextElementSibling){
-            bouton.nextElementSibling.style.backgroundColor="white";
-            bouton.nextElementSibling.style.color="#1D6154";
-        }
-        if(!bouton.nextElementSibling){
-            boutonsMenuFiltres[0].style.backgroundColor="white";
-            boutonsMenuFiltres[0].style.color="#1D6154";
-        }
-        if(!bouton.previousElementSibling){
-            dernierBouton.style.backgroundColor="white";
-            dernierBouton.style.color="#1D6154";
-        }
+for(let i=0; i< boutonsMenuFiltres.length; i++)
+    boutonsMenuFiltres[i].addEventListener('click',(e)=>{
+            boutonsMenuFiltres.forEach((bouton) =>{
+            const btnClique = e.target;
+            bouton.classList.remove("bouton-cible");
+            bouton.style.backgroundColor="white";
+            bouton.style.color="#1D6154";
+            btnClique.classList.toggle("bouton-cible");
+            if(bouton.classList.contains("bouton-cible")){
+                bouton.style.backgroundColor="#1D6154";
+                bouton.style.color="white";
+            }
     })
+       
 })
+
 
 // Fonction pour raffraichir la liste des travaux de l'API //
 export  async function actualiserTravaux(){
