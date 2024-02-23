@@ -4,6 +4,7 @@ import {actualiserTravaux,categoriesIdRecuperes,categoriesRecuperes} from "./scr
 // Récupération du token depuis le LocalStorage//
 const token =  window.localStorage.getItem("token");
 
+// Variables pour les modales //
 const iconeBandeau = document.getElementById("modif");
 const galleriePrinc = document.querySelector(".gallery");
 const portfolio = document.getElementById("portfolio");
